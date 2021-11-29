@@ -12,7 +12,7 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateCustomHostnameBody {
+pub struct UpdateCustomHostnameBody {
     /// The domain where cookies will be set. Has to be a parent domain of the custom hostname to work.
     #[serde(rename = "cookie_domain", skip_serializing_if = "Option::is_none")]
     pub cookie_domain: Option<String>,
@@ -21,9 +21,9 @@ pub struct CreateCustomHostnameBody {
     pub hostname: Option<String>,
 }
 
-impl CreateCustomHostnameBody {
-    pub fn new() -> CreateCustomHostnameBody {
-        CreateCustomHostnameBody {
+impl UpdateCustomHostnameBody {
+    pub fn new() -> UpdateCustomHostnameBody {
+        UpdateCustomHostnameBody {
             cookie_domain: None,
             hostname: None,
         }
