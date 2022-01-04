@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **hosts** | **Vec<String>** |  | 
 **id** | **String** |  | 
 **kratos_config_version** | Option<**String**> | The Project's Kratos Config Version | [optional][readonly]
-**kratos_custom_schema_id** | Option<[**crate::models::NullUuid**](NullUUID.md)> |  | [optional]
+**kratos_custom_schema_id** | Option<**String**> |  | [optional]
 **login_ui_url** | Option<**String**> | Self-Service Login UI URL  Sets the UI URL for the login UI. If left empty, this will use Ory's hosted pages. | [optional]
 **lookup_secret** | Option<[**crate::models::ProjectLookupSecretConfig**](projectLookupSecretConfig.md)> |  | [optional]
 **name** | **String** | The project's name. | 

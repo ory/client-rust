@@ -12,16 +12,18 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ProjectRecoveryConfig {
-    /// Set to true to enable account recovery.
-    #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<bool>,
+pub struct UpdateSubscriptionPayload {
+    #[serde(rename = "plan_or_price")]
+    pub plan_or_price: String,
+    #[serde(rename = "return_to", skip_serializing_if = "Option::is_none")]
+    pub return_to: Option<String>,
 }
 
-impl ProjectRecoveryConfig {
-    pub fn new() -> ProjectRecoveryConfig {
-        ProjectRecoveryConfig {
-            enabled: None,
+impl UpdateSubscriptionPayload {
+    pub fn new(plan_or_price: String) -> UpdateSubscriptionPayload {
+        UpdateSubscriptionPayload {
+            plan_or_price,
+            return_to: None,
         }
     }
 }
