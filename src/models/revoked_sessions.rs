@@ -12,16 +12,16 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SessionDevice {
-    /// UserAgent of this device
-    #[serde(rename = "user_agent", skip_serializing_if = "Option::is_none")]
-    pub user_agent: Option<String>,
+pub struct RevokedSessions {
+    /// The number of sessions that were revoked.
+    #[serde(rename = "count", skip_serializing_if = "Option::is_none")]
+    pub count: Option<i64>,
 }
 
-impl SessionDevice {
-    pub fn new() -> SessionDevice {
-        SessionDevice {
-            user_agent: None,
+impl RevokedSessions {
+    pub fn new() -> RevokedSessions {
+        RevokedSessions {
+            count: None,
         }
     }
 }
