@@ -12,16 +12,18 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SessionDevice {
-    /// UserAgent of this device
-    #[serde(rename = "user_agent", skip_serializing_if = "Option::is_none")]
-    pub user_agent: Option<String>,
+pub struct SqlNullString {
+    #[serde(rename = "String", skip_serializing_if = "Option::is_none")]
+    pub string: Option<String>,
+    #[serde(rename = "Valid", skip_serializing_if = "Option::is_none")]
+    pub valid: Option<bool>,
 }
 
-impl SessionDevice {
-    pub fn new() -> SessionDevice {
-        SessionDevice {
-            user_agent: None,
+impl SqlNullString {
+    pub fn new() -> SqlNullString {
+        SqlNullString {
+            string: None,
+            valid: None,
         }
     }
 }
