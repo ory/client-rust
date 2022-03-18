@@ -1,4 +1,4 @@
-# ProjectRevisionHook
+# NormalizedProjectRevisionHook
 
 ## Properties
 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **web_hook_config_auth_type** | Option<**String**> | HTTP Auth Method to use for the Web-Hook | [optional]
 **web_hook_config_body** | Option<**String**> | URI pointing to the JsonNet template used for Web-Hook payload generation. Only used for those HTTP methods, which support HTTP body payloads. | [optional]
 **web_hook_config_method** | Option<**String**> | The HTTP method to use (GET, POST, etc) for the Web-Hook | [optional]
+**web_hook_config_response_ignore** | Option<**bool**> | Whether to ignore the Web Hook response | [optional]
 **web_hook_config_url** | Option<**String**> | The URL the Web-Hook should call | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,4 +1,4 @@
-# ProjectRevisionThirdPartyLoginProvider
+# NormalizedProjectRevisionThirdPartyProvider
 
 ## Properties
 

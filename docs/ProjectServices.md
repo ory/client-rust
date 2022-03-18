@@ -1,11 +1,10 @@
-# IdentityPreset
+# ProjectServices
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**schema** | [**serde_json::Value**](.md) | Schema is the Identity JSON Schema | 
-**url** | **String** | URL is the preset identifier | 
+**identity** | [**crate::models::ProjectServiceIdentity**](projectServiceIdentity.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
