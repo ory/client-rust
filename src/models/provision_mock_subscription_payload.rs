@@ -12,16 +12,18 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct HealthNotReadyStatus {
-    /// Errors contains a list of errors that caused the not ready status.
-    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
-    pub errors: Option<::std::collections::HashMap<String, String>>,
+pub struct ProvisionMockSubscriptionPayload {
+    #[serde(rename = "identity_id")]
+    pub identity_id: String,
+    #[serde(rename = "plan_or_price")]
+    pub plan_or_price: String,
 }
 
-impl HealthNotReadyStatus {
-    pub fn new() -> HealthNotReadyStatus {
-        HealthNotReadyStatus {
-            errors: None,
+impl ProvisionMockSubscriptionPayload {
+    pub fn new(identity_id: String, plan_or_price: String) -> ProvisionMockSubscriptionPayload {
+        ProvisionMockSubscriptionPayload {
+            identity_id,
+            plan_or_price,
         }
     }
 }
