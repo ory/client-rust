@@ -12,33 +12,41 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Project {
+pub struct ProjectMetadata {
+    /// The Project's Creation Date
+    #[serde(rename = "created_at")]
+    pub created_at: String,
+    #[serde(rename = "hosts")]
+    pub hosts: Vec<String>,
     #[serde(rename = "id")]
     pub id: String,
-    /// The name of the project.
+    /// The project's name if set
     #[serde(rename = "name")]
     pub name: String,
-    #[serde(rename = "revision_id")]
-    pub revision_id: String,
-    #[serde(rename = "services")]
-    pub services: Box<crate::models::ProjectServices>,
     /// The project's slug
-    #[serde(rename = "slug")]
-    pub slug: String,
+    #[serde(rename = "slug", skip_serializing_if = "Option::is_none")]
+    pub slug: Option<String>,
     /// The state of the project.
     #[serde(rename = "state")]
     pub state: State,
+    #[serde(rename = "subscription_id", skip_serializing_if = "Option::is_none")]
+    pub subscription_id: Option<String>,
+    /// Last Time Project was Updated
+    #[serde(rename = "updated_at")]
+    pub updated_at: String,
 }
 
-impl Project {
-    pub fn new(id: String, name: String, revision_id: String, services: crate::models::ProjectServices, slug: String, state: State) -> Project {
-        Project {
+impl ProjectMetadata {
+    pub fn new(created_at: String, hosts: Vec<String>, id: String, name: String, state: State, updated_at: String) -> ProjectMetadata {
+        ProjectMetadata {
+            created_at,
+            hosts,
             id,
             name,
-            revision_id,
-            services: Box::new(services),
-            slug,
+            slug: None,
             state,
+            subscription_id: None,
+            updated_at,
         }
     }
 }
