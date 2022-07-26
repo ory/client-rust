@@ -12,15 +12,19 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct StripeCustomerResponse {
+pub struct IdentitySchemaContainer {
+    /// The ID of the Identity JSON Schema
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    #[serde(rename = "schema", skip_serializing_if = "Option::is_none")]
+    pub schema: Option<Box<crate::models::IdentitySchema>>,
 }
 
-impl StripeCustomerResponse {
-    pub fn new() -> StripeCustomerResponse {
-        StripeCustomerResponse {
+impl IdentitySchemaContainer {
+    pub fn new() -> IdentitySchemaContainer {
+        IdentitySchemaContainer {
             id: None,
+            schema: None,
         }
     }
 }
