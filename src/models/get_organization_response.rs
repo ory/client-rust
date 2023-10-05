@@ -12,17 +12,16 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct IsReady503Response {
-    /// Errors contains a list of errors that caused the not ready status.
-    #[serde(rename = "errors")]
-    pub errors: ::std::collections::HashMap<String, String>,
+pub struct GetOrganizationResponse {
+    #[serde(rename = "organization")]
+    pub organization: Box<crate::models::Organization>,
 }
 
 
-impl IsReady503Response {
-    pub fn new(errors: ::std::collections::HashMap<String, String>) -> IsReady503Response {
-        IsReady503Response {
-                errors,
+impl GetOrganizationResponse {
+    pub fn new(organization: crate::models::Organization) -> GetOrganizationResponse {
+        GetOrganizationResponse {
+                organization: Box::new(organization),
         }
     }
 }
