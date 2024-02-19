@@ -12,7 +12,7 @@
 
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateSubscriptionBody {
+pub struct CreateSubscriptionCommon {
     ///  usd USD eur Euro
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<CurrencyEnum>,
@@ -21,20 +21,17 @@ pub struct CreateSubscriptionBody {
     pub interval: IntervalEnum,
     #[serde(rename = "plan")]
     pub plan: String,
-    #[serde(rename = "provision_first_project")]
-    pub provision_first_project: String,
     #[serde(rename = "return_to", skip_serializing_if = "Option::is_none")]
     pub return_to: Option<String>,
 }
 
 
-impl CreateSubscriptionBody {
-    pub fn new(interval: IntervalEnum, plan: String, provision_first_project: String) -> CreateSubscriptionBody {
-        CreateSubscriptionBody {
+impl CreateSubscriptionCommon {
+    pub fn new(interval: IntervalEnum, plan: String) -> CreateSubscriptionCommon {
+        CreateSubscriptionCommon {
                 currency: None,
                 interval,
                 plan,
-                provision_first_project,
                 return_to: None,
         }
     }
