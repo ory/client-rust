@@ -4,6 +4,7 @@ version = "1.9.0"
 description = "SDK Client for Ory"
 documentation = "https://www.ory.sh/docs/sdk"
 homepage = "https://www.ory.sh"
+repository = "https://github.com/ory/client-rust"
 license = "Apache-2.0"
 authors = ["OpenAPI Generator team and contributors"]
 edition = "2018"
