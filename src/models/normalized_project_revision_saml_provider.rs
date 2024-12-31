@@ -11,61 +11,73 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// CreateIdentityBody : Create Identity Body
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateIdentityBody {
-    #[serde(rename = "credentials", skip_serializing_if = "Option::is_none")]
-    pub credentials: Option<Box<models::IdentityWithCredentials>>,
-    /// Store metadata about the user which is only accessible through admin APIs such as `GET /admin/identities/<id>`.
-    #[serde(rename = "metadata_admin", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub metadata_admin: Option<Option<serde_json::Value>>,
-    /// Store metadata about the identity which the identity itself can see when calling for example the session endpoint. Do not store sensitive information (e.g. credit score) about the identity in this field.
-    #[serde(rename = "metadata_public", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub metadata_public: Option<Option<serde_json::Value>>,
-    /// RecoveryAddresses contains all the addresses that can be used to recover an identity.  Use this structure to import recovery addresses for an identity. Please keep in mind that the address needs to be represented in the Identity Schema or this field will be overwritten on the next identity update.
-    #[serde(rename = "recovery_addresses", skip_serializing_if = "Option::is_none")]
-    pub recovery_addresses: Option<Vec<models::RecoveryIdentityAddress>>,
-    /// SchemaID is the ID of the JSON Schema to be used for validating the identity's traits.
-    #[serde(rename = "schema_id")]
-    pub schema_id: String,
-    /// State is the identity's state. active StateActive inactive StateInactive
+pub struct NormalizedProjectRevisionSamlProvider {
+    /// ClientID is the application's Client ID.
+    #[serde(rename = "client_id", skip_serializing_if = "Option::is_none")]
+    pub client_id: Option<String>,
+    #[serde(rename = "client_secret", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub client_secret: Option<Option<String>>,
+    /// The Project's Revision Creation Date
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    /// Label represents an optional label which can be used in the UI generation.
+    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    /// Mapper specifies the JSONNet code snippet which uses the OpenID Connect Provider's data (e.g. GitHub or Google profile information) to hydrate the identity's data.
+    #[serde(rename = "mapper_url", skip_serializing_if = "Option::is_none")]
+    pub mapper_url: Option<String>,
+    #[serde(rename = "organization_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub organization_id: Option<Option<String>>,
+    /// The Revision's ID this schema belongs to
+    #[serde(rename = "project_revision_id", skip_serializing_if = "Option::is_none")]
+    pub project_revision_id: Option<String>,
+    /// ID is the provider's ID
+    #[serde(rename = "provider_id", skip_serializing_if = "Option::is_none")]
+    pub provider_id: Option<String>,
+    /// RawIDPMetadataXML is the raw XML metadata of the IDP.
+    #[serde(rename = "raw_idp_metadata_xml", skip_serializing_if = "Option::is_none")]
+    pub raw_idp_metadata_xml: Option<String>,
+    /// State indicates the state of the provider  Only providers with state `enabled` will be used for authentication enabled ThirdPartyProviderStateEnabled disabled ThirdPartyProviderStateDisabled
     #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
     pub state: Option<StateEnum>,
-    /// Traits represent an identity's traits. The identity is able to create, modify, and delete traits in a self-service manner. The input will always be validated against the JSON Schema defined in `schema_url`.
-    #[serde(rename = "traits")]
-    pub traits: serde_json::Value,
-    /// VerifiableAddresses contains all the addresses that can be verified by the user.  Use this structure to import verified addresses for an identity. Please keep in mind that the address needs to be represented in the Identity Schema or this field will be overwritten on the next identity update.
-    #[serde(rename = "verifiable_addresses", skip_serializing_if = "Option::is_none")]
-    pub verifiable_addresses: Option<Vec<models::VerifiableIdentityAddress>>,
+    /// Last Time Project's Revision was Updated
+    #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<String>,
 }
 
-impl CreateIdentityBody {
-    /// Create Identity Body
-    pub fn new(schema_id: String, traits: serde_json::Value) -> CreateIdentityBody {
-        CreateIdentityBody {
-            credentials: None,
-            metadata_admin: None,
-            metadata_public: None,
-            recovery_addresses: None,
-            schema_id,
+impl NormalizedProjectRevisionSamlProvider {
+    pub fn new() -> NormalizedProjectRevisionSamlProvider {
+        NormalizedProjectRevisionSamlProvider {
+            client_id: None,
+            client_secret: None,
+            created_at: None,
+            id: None,
+            label: None,
+            mapper_url: None,
+            organization_id: None,
+            project_revision_id: None,
+            provider_id: None,
+            raw_idp_metadata_xml: None,
             state: None,
-            traits,
-            verifiable_addresses: None,
+            updated_at: None,
         }
     }
 }
-/// State is the identity's state. active StateActive inactive StateInactive
+/// State indicates the state of the provider  Only providers with state `enabled` will be used for authentication enabled ThirdPartyProviderStateEnabled disabled ThirdPartyProviderStateDisabled
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum StateEnum {
-    #[serde(rename = "active")]
-    Active,
-    #[serde(rename = "inactive")]
-    Inactive,
+    #[serde(rename = "enabled")]
+    Enabled,
+    #[serde(rename = "disabled")]
+    Disabled,
 }
 
 impl Default for StateEnum {
     fn default() -> StateEnum {
-        Self::Active
+        Self::Enabled
     }
 }
 
