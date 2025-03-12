@@ -11,20 +11,54 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// UiNodeDivisionAttributes : Division sections are used for interactive widgets that require a hook in the DOM / view.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct TaxLineItem {
-    #[serde(rename = "amount_in_cent", skip_serializing_if = "Option::is_none")]
-    pub amount_in_cent: Option<i64>,
-    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
-    pub title: Option<String>,
+pub struct UiNodeDivisionAttributes {
+    /// The script MIME type
+    #[serde(rename = "class", skip_serializing_if = "Option::is_none")]
+    pub class: Option<String>,
+    /// Data is a map of key-value pairs that are passed to the division.  They may be used for `data-...` attributes.
+    #[serde(rename = "data", skip_serializing_if = "Option::is_none")]
+    pub data: Option<std::collections::HashMap<String, String>>,
+    /// A unique identifier
+    #[serde(rename = "id")]
+    pub id: String,
+    /// NodeType represents this node's types. It is a mirror of `node.type` and is primarily used to allow compatibility with OpenAPI 3.0. In this struct it technically always is \"script\". text Text input Input img Image a Anchor script Script div Division
+    #[serde(rename = "node_type")]
+    pub node_type: NodeTypeEnum,
 }
 
-impl TaxLineItem {
-    pub fn new() -> TaxLineItem {
-        TaxLineItem {
-            amount_in_cent: None,
-            title: None,
+impl UiNodeDivisionAttributes {
+    /// Division sections are used for interactive widgets that require a hook in the DOM / view.
+    pub fn new(id: String, node_type: NodeTypeEnum) -> UiNodeDivisionAttributes {
+        UiNodeDivisionAttributes {
+            class: None,
+            data: None,
+            id,
+            node_type,
         }
+    }
+}
+/// NodeType represents this node's types. It is a mirror of `node.type` and is primarily used to allow compatibility with OpenAPI 3.0. In this struct it technically always is \"script\". text Text input Input img Image a Anchor script Script div Division
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum NodeTypeEnum {
+    #[serde(rename = "text")]
+    Text,
+    #[serde(rename = "input")]
+    Input,
+    #[serde(rename = "img")]
+    Img,
+    #[serde(rename = "a")]
+    A,
+    #[serde(rename = "script")]
+    Script,
+    #[serde(rename = "div")]
+    Div,
+}
+
+impl Default for NodeTypeEnum {
+    fn default() -> NodeTypeEnum {
+        Self::Text
     }
 }
 
