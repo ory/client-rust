@@ -11,23 +11,62 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// SuccessfulCodeExchangeResponse : The Response for Registration Flows via API
+/// NormalizedProjectRevisionScimClient : SCIMClient represents a SCIM client configuration to be used by an external identity provider.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SuccessfulCodeExchangeResponse {
-    #[serde(rename = "session")]
-    pub session: Box<models::Session>,
-    /// The Session Token  A session token is equivalent to a session cookie, but it can be sent in the HTTP Authorization Header:  Authorization: bearer ${session-token}  The session token is only issued for API flows, not for Browser flows!
-    #[serde(rename = "session_token", skip_serializing_if = "Option::is_none")]
-    pub session_token: Option<String>,
+pub struct NormalizedProjectRevisionScimClient {
+    /// The secret that the client uses in the authorization header to authenticate itself.
+    #[serde(rename = "authorization_header_secret")]
+    pub authorization_header_secret: String,
+    /// The unique ID of the SCIM server.
+    #[serde(rename = "client_id")]
+    pub client_id: String,
+    /// The SCIM client's creation time
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
+    /// The SCIM server's label
+    #[serde(rename = "label")]
+    pub label: String,
+    /// Mapper specifies the JSONNet code snippet which uses the SCIM provider's data to hydrate the identity's data.
+    #[serde(rename = "mapper_url")]
+    pub mapper_url: String,
+    /// OrganizationID is the organization ID for this SCIM server.
+    #[serde(rename = "organization_id")]
+    pub organization_id: String,
+    /// State indicates the state of the SCIM server  Only servers with state `enabled` will be available for SCIM provisioning. enabled ThirdPartyProviderStateEnabled disabled ThirdPartyProviderStateDisabled
+    #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
+    pub state: Option<StateEnum>,
+    /// Last time the SCIM client was updated
+    #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<String>,
 }
 
-impl SuccessfulCodeExchangeResponse {
-    /// The Response for Registration Flows via API
-    pub fn new(session: models::Session) -> SuccessfulCodeExchangeResponse {
-        SuccessfulCodeExchangeResponse {
-            session: Box::new(session),
-            session_token: None,
+impl NormalizedProjectRevisionScimClient {
+    /// SCIMClient represents a SCIM client configuration to be used by an external identity provider.
+    pub fn new(authorization_header_secret: String, client_id: String, label: String, mapper_url: String, organization_id: String) -> NormalizedProjectRevisionScimClient {
+        NormalizedProjectRevisionScimClient {
+            authorization_header_secret,
+            client_id,
+            created_at: None,
+            label,
+            mapper_url,
+            organization_id,
+            state: None,
+            updated_at: None,
         }
+    }
+}
+/// State indicates the state of the SCIM server  Only servers with state `enabled` will be available for SCIM provisioning. enabled ThirdPartyProviderStateEnabled disabled ThirdPartyProviderStateDisabled
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum StateEnum {
+    #[serde(rename = "enabled")]
+    Enabled,
+    #[serde(rename = "disabled")]
+    Disabled,
+}
+
+impl Default for StateEnum {
+    fn default() -> StateEnum {
+        Self::Enabled
     }
 }
 
