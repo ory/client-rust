@@ -12,15 +12,20 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Usage {
-    #[serde(rename = "GenericUsage", skip_serializing_if = "Option::is_none")]
-    pub generic_usage: Option<Box<models::GenericUsage>>,
+pub struct RevisionAccountExperienceCustomTranslation {
+    /// The locale (e.g. \"en\", \"de\")
+    #[serde(rename = "locale")]
+    pub locale: String,
+    /// The URL where the i18n json can be found
+    #[serde(rename = "translations")]
+    pub translations: String,
 }
 
-impl Usage {
-    pub fn new() -> Usage {
-        Usage {
-            generic_usage: None,
+impl RevisionAccountExperienceCustomTranslation {
+    pub fn new(locale: String, translations: String) -> RevisionAccountExperienceCustomTranslation {
+        RevisionAccountExperienceCustomTranslation {
+            locale,
+            translations,
         }
     }
 }
