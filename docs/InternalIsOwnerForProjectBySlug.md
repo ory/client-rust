@@ -1,10 +1,10 @@
-# GetMetricsEventTypesResponse
+# InternalIsOwnerForProjectBySlug
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**events** | **Vec<String>** | The list of data points. | [readonly]
+**project_id** | **String** | ProjectID is the project's ID. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
