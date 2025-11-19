@@ -313,7 +313,7 @@ Name | Type | Description  | Required | Notes
 > models::Project get_project(project_id)
 Get a Project
 
-Get a projects you have access to by its ID.
+Get a project you have access to by its ID.
 
 ### Parameters
 
