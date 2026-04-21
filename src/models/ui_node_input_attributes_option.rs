@@ -11,43 +11,19 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// UpdateSettingsFlowWithSamlMethod : Update settings flow using SAML
+/// UiNodeInputAttributesOption : Represents a single selectable value for an input whose JSON schema defined an `enum`. The value is always a scalar JSON type (string, number, or boolean) serialized verbatim from the schema. When present, clients should render the parent input as a select/dropdown.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdateSettingsFlowWithSamlMethod {
-    /// The CSRF Token
-    #[serde(rename = "csrf_token", skip_serializing_if = "Option::is_none")]
-    pub csrf_token: Option<String>,
-    /// Flow ID is the flow's ID.  in: query
-    #[serde(rename = "flow", skip_serializing_if = "Option::is_none")]
-    pub flow: Option<String>,
-    /// Link this provider  Either this or `unlink` must be set.  type: string in: body
-    #[serde(rename = "link", skip_serializing_if = "Option::is_none")]
-    pub link: Option<String>,
-    /// Method  Should be set to saml when trying to update a profile.
-    #[serde(rename = "method")]
-    pub method: String,
-    /// The identity's traits  in: body
-    #[serde(rename = "traits", skip_serializing_if = "Option::is_none")]
-    pub traits: Option<serde_json::Value>,
-    /// Transient data to pass along to any webhooks
-    #[serde(rename = "transient_payload", skip_serializing_if = "Option::is_none")]
-    pub transient_payload: Option<serde_json::Value>,
-    /// Unlink this provider  Either this or `link` must be set.  type: string in: body
-    #[serde(rename = "unlink", skip_serializing_if = "Option::is_none")]
-    pub unlink: Option<String>,
+pub struct UiNodeInputAttributesOption {
+    /// The value that will be submitted when this option is picked. It is serialized verbatim from the JSON schema `enum` entry, so it is always a scalar JSON value (string, number, or boolean).
+    #[serde(rename = "value", deserialize_with = "Option::deserialize")]
+    pub value: Option<serde_json::Value>,
 }
 
-impl UpdateSettingsFlowWithSamlMethod {
-    /// Update settings flow using SAML
-    pub fn new(method: String) -> UpdateSettingsFlowWithSamlMethod {
-        UpdateSettingsFlowWithSamlMethod {
-            csrf_token: None,
-            flow: None,
-            link: None,
-            method,
-            traits: None,
-            transient_payload: None,
-            unlink: None,
+impl UiNodeInputAttributesOption {
+    /// Represents a single selectable value for an input whose JSON schema defined an `enum`. The value is always a scalar JSON type (string, number, or boolean) serialized verbatim from the schema. When present, clients should render the parent input as a select/dropdown.
+    pub fn new(value: Option<serde_json::Value>) -> UiNodeInputAttributesOption {
+        UiNodeInputAttributesOption {
+            value,
         }
     }
 }
