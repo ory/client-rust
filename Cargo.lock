@@ -789,7 +789,7 @@ dependencies = [
 
 [[package]]
 name = "ory-client"
-version = "1.22.45"
+version = "1.22.46"
 dependencies = [
  "reqwest",
  "serde",
