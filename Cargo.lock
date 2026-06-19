@@ -746,7 +746,7 @@ dependencies = [
 
 [[package]]
 name = "ory-client"
-version = "1.22.54"
+version = "1.22.55"
 dependencies = [
  "reqwest",
  "serde",
